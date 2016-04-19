@@ -6,5 +6,9 @@ node[:deploy].each do |application, deploy|
     code <<-EOH
     chmod -R 775 bootstrap
     EOH
+    cwd "#{deploy[:deploy_to]}"
+    code <<-EOH
+    chmod -R 775 shared
+    EOH
   end
 end
