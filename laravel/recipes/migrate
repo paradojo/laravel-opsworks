@@ -1,0 +1,10 @@
+node[:deploy].each do |application, deploy|
+  script "running initial migration" do
+    interpreter "bash"
+    user "www-data"
+    cwd "#{deploy[:deploy_to]}/current"
+    code <<-EOH
+    php artisan migrate --seed
+    EOH
+  end
+end
